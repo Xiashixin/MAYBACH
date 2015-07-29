@@ -4,13 +4,13 @@
     <!-- 命名空间 -->
     <typeAliases>
         <!-- 系统表 -->
-        <typeAlias alias="User"       type="com.framework.entity.User"/>
-        <typeAlias alias="Account"    type="com.framework.entity.Account"/>
-        <typeAlias alias="Role"       type="com.framework.entity.Role"/>
-        <typeAlias alias="UserRole"   type="com.framework.entity.UserRole"/>
-        <typeAlias alias="Module"     type="com.framework.entity.Module"/>
-        <typeAlias alias="RoleModule" type="com.framework.entity.RoleModule"/>
-        <typeAlias alias="Operation"  type="com.framework.entity.Operation"/>
-        <typeAlias alias="RoleAction" type="com.framework.entity.RoleOperation"/>
+        <typeAlias alias="User"       type="com.authority.entity.User"/>
+        <typeAlias alias="Account"    type="com.authority.entity.Account"/>
+        <typeAlias alias="Role"       type="com.authority.entity.Role"/>
+        <typeAlias alias="UserRole"   type="com.authority.entity.UserRole"/>
+        <typeAlias alias="Module"     type="com.authority.entity.Module"/>
+        <typeAlias alias="RoleModule" type="com.authority.entity.RoleModule"/>
+        <typeAlias alias="Operation"  type="com.authority.entity.Operation"/>
+        <typeAlias alias="RoleAction" type="com.authority.entity.RoleOperation"/>
     </typeAliases>
 </configuration>
