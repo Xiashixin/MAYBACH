@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.ModuleMapper">
+    
+    <!-- 新增模块 -->
+    <insert id="createModule" parameterType="Module">
+        INSERT into Sys_framework_module(id, name, moduleCount) 
+               values(#{id}, #{name}, #{moduleCount})
+    </insert>
+    
+    <!-- 查询模块 -->
+    <select id="queryModule" parameterType="Module" resultType="Module">
+       SELECT * from Sys_framework_module
+              where deleteFlag = 'F'
+	          <if test="name!=null and name!=''">
+	            and name like CONCAT('%', #{name})
+	          </if>
+    </select>
+    
+    <!-- 根据父模块查询子模块 -->
+    <select id="queryChildByParent" parameterType="String" resultType="Module">
+        SELECT * from Sys_framework_module
+               where deleteFlag = 'F' 
+               and parentId = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 命名空间 -->
+    <typeAliases>
+        <!-- 系统表 -->
+        <typeAlias alias="User"       type="com.framework.entity.User"/>
+        <typeAlias alias="Account"    type="com.framework.entity.Account"/>
+        <typeAlias alias="Role"       type="com.framework.entity.Role"/>
+        <typeAlias alias="UserRole"   type="com.framework.entity.UserRole"/>
+        <typeAlias alias="Module"     type="com.framework.entity.Module"/>
+        <typeAlias alias="RoleModule" type="com.framework.entity.RoleModule"/>
+        <typeAlias alias="Operation"  type="com.framework.entity.Operation"/>
+        <typeAlias alias="RoleAction" type="com.framework.entity.RoleOperation"/>
+    </typeAliases>
+</configuration>

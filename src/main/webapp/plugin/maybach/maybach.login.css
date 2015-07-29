@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+/*字体*/
+body {
+    font-family: "Microsoft YaHei" !important;
+}
+.maybach-navbar, .maybach-collapse {
+	margin-left: auto ;
+    margin-right: auto;
+}
+
+.form-signin-heading {
+	text-align: center;
+}
+
+/*导航栏*/
+.navbar-inverse {
+    background-color: #303a40;
+}
+.navbar-brand {
+    font-size: 26px;
+    height: 65px;
+    padding: 20px 20px;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+	background-color: #303a40;
+}
+.maybach-nav-top {
+	float: right;
+	margin-right: 100px;
+}
+.maybach-nav-bottom {
+	padding-right: 30px;
+}
+.active {
+	margin-left: 2px;
+}
+.navbar-nav-a {
+	font-size: 16px;
+	height: 65px;
+}
+.navbar-nav>li>a {
+	padding-top: 20px;
+}
+
+/*主页背景*/
+.maybach-bg {
+    background-image: url(../../image/bg_1.jpg);
+    height: 650px !important;
+}
+
+.maybach-introduce {
+    height: 450px !important;
+}
+
+.maybach-link {
+    height: 0px !important;
+}
+
+.maybach-h2 {
+    font-size: 46px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    line-height: 56px;
+    max-width: 330px;
+    padding: 20px 15px 15px 15px;
+    margin: 0 auto;
+}
+
+.maybach-h3 {
+    font-weight: normal;
+    letter-spacing: 2px;
+    line-height: 56px;
+    max-width: 770px;
+    padding: 10px 15px -10px 15px;
+    margin: 0 auto;
+    text-align: center;
+}

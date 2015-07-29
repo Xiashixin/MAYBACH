@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.AccountMapper">
+    
+    <!-- 新增账户 -->
+    <insert id="createAccount" parameterType="Account">
+        INSERT into Sys_framework_account(id, accountName, password) 
+               values(#{id}, #{accountName}, #{password}, #{userId})
+    </insert>
+    
+    <!-- 验证账户 -->
+    <select id="valiAccount" parameterType="Account" resultType="Account">
+        SELECT * from Sys_framework_account
+               where deleteFlag = 'F'
+               and accountName = #{accountName}
+               and password = #{password}      
+    </select>
+</mapper>

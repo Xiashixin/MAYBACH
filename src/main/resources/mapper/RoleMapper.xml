@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.RoleMapper">
+    
+    <!-- 新增角色 -->
+    <insert id="createRole" parameterType="Role">
+        INSERT into Sys_framework_role(id, name, moduleCount) 
+               values(#{id}, #{name}, #{moduleCount})
+    </insert>
+    
+    <!-- 查询角色 -->
+    <select id="queryRole" parameterType="String" resultType="Role">
+        SELECT * from Sys_framework_role
+               where deleteFlag = 'F'
+               <if test="name!=null and name!=''">
+                 and name like CONCAT('%', #{name})
+               </if>
+    </select>
+    
+    <!-- 根据角色id查询角色信息和所拥有模块信息(权限) -->
+    <select id="queryRoleById" parameterType="String" resultMap="roleModuleMap">
+        SELECT r.id, r.name, r.moduleCount, m.id as moduleId, m.name as moduleName, m.path, m.parentId, m.image, m.enable, m.sort
+               from Sys_framework_role r 
+               left join Sys_framework_role_module rm on r.id = rm.roleId
+               left join Sys_framework_module m on rm.moduleId = m.id
+               where r.id = #{id}
+               order by m.sort
+    </select>
+    
+    <!-- 根据多个角色id查询角色信息和所拥有模块信息(权限) -->
+    <select id="queryRoleByIds" parameterType="String" resultMap="roleModuleMap">
+        SELECT r.id, r.name, r.moduleCount, m.id as moduleId, m.name as moduleName, m.path, m.parentId, m.image, m.enable, m.sort
+               from Sys_framework_role r 
+               left join Sys_framework_role_module rm on r.id = rm.roleId
+               left join Sys_framework_module m on rm.moduleId = m.id
+               where r.id in #{ids}
+               order by m.sort
+    </select>
+    
+    
+    <!-- 构建结果集  start -->
+    <!-- 角色对象的结果集 -->
+    <resultMap type="Role" id="roleMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="moduleCount" column="moduleCount"/>
+    </resultMap>
+    <!-- 角色关联菜单对象的结果集 -->
+    <resultMap type="Role" id="roleModuleMap" extends="roleMap">
+        <collection property="moduleList" ofType="Module">
+            <id property="id" column="moduleId"/>
+            <result property="name" column="moduleName"/>
+            <result property="path" column="path"/>
+            <result property="parentId" column="parentId"/>
+            <result property="image" column="image"/>
+            <result property="enable" column="enable"/>
+            <result property="sort" column="sort"/>
+        </collection>
+    </resultMap>
+    <!-- 构建结果集  end -->
+</mapper>

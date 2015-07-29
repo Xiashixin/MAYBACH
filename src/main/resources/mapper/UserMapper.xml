@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.UserMapper">
+    
+    <!-- 查询用户 -->
+    <select id="queryUsers" parameterType="User" resultType="User">
+        SELECT * from Sys_framework_user
+               where deleteFlag = 'F'
+               <if test="name!=null and name!=''">
+                 and name like CONCAT('%', #{name})
+               </if>
+               <if test="orgId!=null and orgId!=''">
+                 and orgId = #{orgId}      
+               </if>
+    </select>
+    
+    <!-- 根据用户id查询用户信息和角色信息 -->
+    <select id="queryUserById" parameterType="String" resultMap="userRoleMap">
+        SELECT u.id, u.name, u.orgId, r.id as roleId, r.name as roleName, r.moduleCount
+               from Sys_framework_user u  
+               left join Sys_framework_user_role ur on u.id = ur.userId
+               left join Sys_framework_role r on ur.roleId = r.id 
+               where u.id = #{id}
+               and u.deleteFlag = 'F'
+    </select>
+    
+    
+    <!-- 新增用户 -->
+    <insert id="createUser" parameterType="User">
+        INSERT into Sys_framework_user(id, name, orgId) 
+               values(#{id}, #{name}, #{orgId})
+    </insert>
+    
+    
+    <!-- 修改用户 -->
+    <update id="updateUser" parameterType="User">
+        UPDATE Sys_framework_user
+               set name = #{name},
+               orgId = #{orgId}
+               where id = #{id}
+    </update>
+    
+    <!-- 删除用户 -->
+    <update id="deleteUsers" parameterType="String">
+        UPDATE Sys_framework_user
+               set deleteFlag = 'T'
+               where id in #{ids}
+    </update>
+    
+    
+    <!-- 关联信息：用户关联角色 -->
+    <insert id="relateRole" parameterType="UserRole">
+        INSERT into Sys_framework_user_role(id, userId, roleId)
+               values(#{id}, #{userId}, #{roleId})
+    </insert>
+    
+    
+    <!-- 构建结果集  start -->
+    <!-- 用户对象的结果集 -->
+    <resultMap type="User" id="userMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="orgId" column="orgId"/>
+    </resultMap>
+    <!-- 用户对象关联的角色对象结果集,注意其中column不要重名 -->
+    <resultMap type="User" id="userRoleMap" extends="userMap">
+        <collection property="roleList" ofType="Role">
+            <id property="id" column="roleId"/>
+            <result property="name" column="roleName"/>
+            <result property="moduleCount" column="moduleCount"/>
+        </collection>
+    </resultMap>
+    <!-- 构建结果集  end -->
+</mapper>
