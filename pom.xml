@@ -118,10 +118,10 @@
       </dependency>
       <!-- json数据之二  smart-json -->
       <dependency>
-	      <groupId>net.minidev</groupId>
-	      <artifactId>json-smart</artifactId>
-	      <version>2.1.1</version>
-	  </dependency>
+          <groupId>net.minidev</groupId>
+          <artifactId>json-smart</artifactId>
+          <version>2.1.1</version>
+      </dependency>
       <!-- 日志文件管理包 -->
       <!-- log start -->
       <dependency>
